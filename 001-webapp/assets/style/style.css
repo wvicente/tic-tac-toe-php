@@ -1,0 +1,49 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+h1 { text-align: center; }
+
+.board {
+    height: 252pt;
+    margin: auto;
+    text-transform: capitalize;
+    width: 252pt;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.board div {
+    border: 1px #000 solid;
+    cursor: pointer;
+    float: left;
+    height: 75pt;
+    line-height: 75pt;
+    text-align: center;
+    width: 75pt;
+}
+
+.board div:nth-child(-n+4)
+{
+    background-color: transparent;
+    border-color: transparent;
+    cursor: default;
+    height: 20pt;
+    line-height: 20pt;
+}
+
+.board div:nth-last-child(4n)
+{
+    background-color: transparent;
+    cursor: default;
+    border-color: transparent;
+    width: 20pt;
+}
+
+.board div:nth-child(4n+2) { border-left-color: transparent; }
+.board div:nth-child(4n+4) { border-right-color: transparent; }
+.board div:nth-last-child(-n+3) { border-bottom-color: transparent; }
+.board div:nth-child(-n+8) { border-top-color: transparent; }

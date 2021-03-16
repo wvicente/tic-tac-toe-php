@@ -1,0 +1,11 @@
+version: "3.9"
+services: 
+  webapp:
+    build:
+      context: ./
+      dockerfile: Dockerfile-webapp
+    restart: always
+    volumes:
+      - ../001-webapp:/var/www/html
+    ports:
+      - 8080:80

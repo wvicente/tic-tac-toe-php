@@ -18,7 +18,7 @@ use Game\TicTacToe;
 $ttt = new TicTacToe();
 
 $result = $ttt
-	->set_difficulty(TicTacToe::NORMAL)
+	->set_difficulty(TicTacToe::EASY)
 	->set_Players(TicTacToe::X === strtolower($_POST['player']) ? TicTacToe::X : TicTacToe::O)
 	->set_board($_POST['board'])
 	->Play();

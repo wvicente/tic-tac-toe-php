@@ -19,7 +19,7 @@ class TicTacToeResult {
 class TicTacToe {
 
 	// difficulty
-	public const EASY = 0; // equals random movement
+	public const EASY = 0; // random movement
 	public const NORMAL = 4; // not too deep
 	public const HARD = 5; // best winning scenario
 
@@ -160,7 +160,7 @@ class TicTacToe {
 
 		$empty = $this->findEmpty($board); // empty spots
 
-		shuffle($empty);
+		shuffle($empty); // shuffle the moves array
 
 		$score = $this->checkVictory($board, true); // check ai victory
 
@@ -171,12 +171,6 @@ class TicTacToe {
 			$result->score = MinimaxResult::LOST;
 			return $result;
 		} else if (sizeof($empty) === MinimaxResult::DRAW){ // if do not exist more possible places
-			$result->score = MinimaxResult::DRAW;
-			return $result;
-		}
-
-		if($depth > $this->maxDepth)
-		{
 			$result->score = MinimaxResult::DRAW;
 			return $result;
 		}
@@ -243,11 +237,18 @@ class TicTacToe {
 	public function Play(): TicTacToeResult
 	{
 		$result = new TicTacToeResult();
-		$game = $this->minimax(null, false);
+		
+		$victory = $this->checkVictory(null, false);
+		if($victory !== MinimaxResult::DRAW) {
+			$result->board = $this->board;
+			$result->gameStatus = $victory;
+		} else {
+			$game = $this->minimax(null, false);
+			$result->board = $game->move;
+			$result->gameStatus = $game->score * (-1);
+		}
 
-		$result->board = $game->move;
-		$result->gameStatus = $game->score * (-1);
-		$result->available_moves = sizeof($this->findEmpty($game->move));
+		$result->available_moves = sizeof($this->findEmpty($result->board));
 
 		return $result;
 	}
